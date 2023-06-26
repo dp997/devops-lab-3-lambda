@@ -45,5 +45,6 @@ def lambda_handler(event, context):
         index = False
     )
     conn.close()
+    engine.dispose()
 
     return("Uploaded data.")
