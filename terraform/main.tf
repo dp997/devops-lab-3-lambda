@@ -16,7 +16,6 @@ variable "aws_region" {
 #`````````
 #ECR
 #`````````
-
 resource "aws_ecr_repository" "lambda_ecr" {
   name = "${var.project_name}-lambda"
   image_tag_mutability = "MUTABLE"
