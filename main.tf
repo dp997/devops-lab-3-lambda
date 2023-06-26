@@ -38,8 +38,7 @@ resource "aws_ecr_lifecycle_policy" "ecr_policy" {
         "rulePriority": 1,
         "description": "Keep only 1 image",
         "selection": {
-          "tagStatus": "tagged",
-          "tagPrefixList": ["v"],
+          "tagStatus": "any",
           "countType": "imageCountMoreThan",
           "countNumber": 1
         },
