@@ -39,7 +39,7 @@ resource "aws_ecr_lifecycle_policy" "ecr_policy" {
         "selection": {
           "tagStatus": "any",
           "countType": "imageCountMoreThan",
-          "countNumber": 3
+          "countNumber": 1
         },
         "action": {
           "type": "expire"
