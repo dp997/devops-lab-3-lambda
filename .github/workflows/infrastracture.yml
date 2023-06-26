@@ -16,11 +16,41 @@ jobs:
     steps:
     - name: Check out code
       uses: actions/checkout@v2
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1.7.0
+      with:
+        role-to-assume: ${{ secrets.IAM_ROLE_TERRAFORM }}
+        role-session-name: Github_to_AWS_via_FederatedOIDC
+        aws-region: us-east-1
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       with:
         terraform_version: 1.4.6
     - name: Run terraform fmt check
-      run: terraform fmt -check -diff -recursive ./terraform
+      run: | 
+        cd terraform
+        terraform fmt -check -diff -recursive
+    - name: Initialize terraform
+      run:  |
+        cd terraform
+        terraform init -input=false
+    - name: Plan terraform
+      id: plan
+      continue-on-error: true
+      run: |
+        cd terraform
+        terraform plan -input-false -no-color -out tf.plan
+    - name: Show terraform plan
+      id: show
+      run: |
+        cd terraform
+        terraform show -no-color tf.plan 2>&1 > /tmp/plan.txt
+    - name: Read plan
+      id: read_plan
+      uses: jaywcjlove/github-action-read-file@main
+      with:
+        path: /tmp/plan.txt
+    - name: Echo plan.txt
+      run: echo "${{ steps.read_plan.outputs.content }}"
 
   
