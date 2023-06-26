@@ -2,9 +2,7 @@ name: Terraform
 on:
   push:
     branches: [main]
-    paths: ['*.tf']
-    
-    
+    paths: ['terraform/**]
     
 permissions:
   id-token: write
