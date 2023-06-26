@@ -6,7 +6,7 @@ terraform {
   }
   backend "s3" {
     bucket  = "terraform-lab-dpierzga"
-    key     = "state-ecr/terraform.tfstate"
+    key     = "state-ecr/lambda-ecr.tfstate"
     region  = "us-east-1"
     encrypt = true
   }
