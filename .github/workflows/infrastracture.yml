@@ -37,18 +37,12 @@ jobs:
       continue-on-error: true
       run: |
         cd terraform
-        terraform plan -input=false -no-color -out tf.plan
-    - name: Show terraform plan
-      id: show
+        terraform plan -input=false 
+    - name: Apply terraform
+      id: apply
+      continue-on-error: false
       run: |
         cd terraform
-        terraform show -no-color tf.plan 2>&1 > /tmp/plan.txt
-    - name: Read plan
-      id: read_plan
-      uses: jaywcjlove/github-action-read-file@main
-      with:
-        path: /tmp/plan.txt
-    - name: Echo plan.txt
-      run: echo "${{ steps.read_plan.outputs.content }}"
+        terraform apply -input=false
 
   
