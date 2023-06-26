@@ -37,7 +37,7 @@ jobs:
       continue-on-error: true
       run: |
         cd terraform
-        terraform plan -input-false -no-color -out tf.plan
+        terraform plan -input=false -no-color -out tf.plan
     - name: Show terraform plan
       id: show
       run: |
