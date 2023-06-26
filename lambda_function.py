@@ -9,7 +9,7 @@ rds = boto3.client('rds')
 s3_client = boto3.client('s3')
 
 print("Connected to AWS")
-
+#
 dbhostname = os.environ['DBHOSTNAME']
 dbport = os.environ['DBPORT']
 dbusername = os.environ['DBUSERNAME']
