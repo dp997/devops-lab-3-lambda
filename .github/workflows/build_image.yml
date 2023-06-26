@@ -4,6 +4,7 @@ on:
  
   push:
     branches: [ main ]
+    paths: ['lambda_function.py', 'Dockerfile', 'lambda_requirements.txt']
 permissions:
       id-token: write   # This is required for requesting the JWT
       contents: read    # This is required for actions/checkout
@@ -23,7 +24,7 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1.7.0
       with:
-        role-to-assume: ${{ vars.IAM_ROLE }}
+        role-to-assume: ${{ secrets.IAM_ROLE_ECR }}
         role-session-name: Github_to_AWS_via_FederatedOIDC
         aws-region: us-east-1
 

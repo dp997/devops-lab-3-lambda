@@ -1,0 +1,26 @@
+name: Terraform
+on:
+  push:
+    branches: [main]
+    paths: ['*.tf']
+    
+    
+    
+permissions:
+  id-token: write
+  contents: read
+  
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 1.4.6
+    - name: Run terraform fmt check
+      run: terraform fmt -check -diff -recursive ./terraform
+
+  
